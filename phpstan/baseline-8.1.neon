@@ -86,11 +86,6 @@ parameters:
 			path: ../src/Composer/Downloader/GzipDownloader.php
 
 		-
-			message: "#^Parameter \\#1 \\$string of function rawurldecode expects string, string\\|false given\\.$#"
-			count: 1
-			path: ../src/Composer/Downloader/VcsDownloader.php
-
-		-
 			message: "#^Parameter \\#3 \\$length of function substr expects int\\|null, int\\<0, max\\>\\|false given\\.$#"
 			count: 1
 			path: ../src/Composer/EventDispatcher/EventDispatcher.php
@@ -182,11 +177,6 @@ parameters:
 
 		-
 			message: "#^Only booleans are allowed in &&, int\\<0, 2097152\\> given on the right side\\.$#"
-			count: 1
-			path: ../src/Composer/Util/Http/CurlDownloader.php
-
-		-
-			message: "#^Parameter \\#1 \\$haystack of function strpos expects string, string\\|null given\\.$#"
 			count: 1
 			path: ../src/Composer/Util/Http/CurlDownloader.php
 

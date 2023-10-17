@@ -91,7 +91,7 @@ Out of the box, Composer supports four types:
 - **library:** This is the default. It will copy the files to `vendor`.
 - **project:** This denotes a project rather than a library. For example
   application shells like the [Symfony standard edition](https://github.com/symfony/symfony-standard),
-  CMSs like the [SilverStripe installer](https://github.com/silverstripe/silverstripe-installer)
+  CMSs like the [Silverstripe installer](https://github.com/silverstripe/silverstripe-installer)
   or full fledged applications distributed as packages. This can for example
   be used by IDEs to provide listings of projects to initialize when creating
   a new workspace.
@@ -450,7 +450,7 @@ that exact version, and not any other version, which would be incorrect.
 
 Map of packages that are provided by this package. This is mostly
 useful for implementations of common interfaces. A package could depend on
-some virtual package e.g. `psr/logger-implementation`, any library that implements
+some virtual package e.g. `psr/log-implementation`, any library that implements
 this logger interface would list it in `provide`. Implementors can then
 be [found on Packagist.org](https://packagist.org/providers/psr/log-implementation).
 

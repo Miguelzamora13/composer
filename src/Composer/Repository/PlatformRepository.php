@@ -238,7 +238,12 @@ class PlatformRepository extends ArrayRepository
                             $parsedVersion = Version::parseOpenssl($sslMatches['version'], $isFips);
                             $this->addLibrary($name.'-openssl'.($isFips ? '-fips' : ''), $parsedVersion, 'curl OpenSSL version ('.$parsedVersion.')', [], $isFips ? ['curl-openssl'] : []);
                         } else {
-                            $this->addLibrary($name.'-'.$library, $sslMatches['version'], 'curl '.$library.' version ('.$sslMatches['version'].')', ['curl-openssl']);
+                            if ($library === '(securetransport) openssl') {
+                                $shortlib = 'securetransport';
+                            } else {
+                                $shortlib = $library;
+                            }
+                            $this->addLibrary($name.'-'.$shortlib, $sslMatches['version'], 'curl '.$library.' version ('.$sslMatches['version'].')', ['curl-openssl']);
                         }
                     }
 
@@ -444,6 +449,12 @@ class PlatformRepository extends ArrayRepository
                     break;
 
                 case 'pgsql':
+                    if ($this->runtime->hasConstant('PGSQL_LIBPQ_VERSION')) {
+                        $this->addLibrary('pgsql-libpq', $this->runtime->getConstant('PGSQL_LIBPQ_VERSION'), 'libpq for pgsql');
+                        break;
+                    }
+                // intentional fall-through to next case...
+
                 case 'pdo_pgsql':
                     $info = $this->runtime->getExtensionInfo($name);
 

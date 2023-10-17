@@ -1,8 +1,66 @@
+### [2.6.5] 2023-10-06
+
+  * Fixed error when vendor dir contains broken symlinks (#11670)
+  * Fixed composer.lock missing from Composer's zip archives (#11674)
+  * Fixed AutoloadGenerator::dump() non-BC signature change in 2.6.4 (cb363b0e8)
+
+### [2.6.4] 2023-09-29
+
+  * Security: Fixed possible remote code execution vulnerability if composer.phar is publicly accessible, executable as PHP, and register_argc_argv is enabled in php.ini (GHSA-jm6m-4632-36hf / CVE-2023-43655)
+  * Fixed json output of abandoned packages in audit command (#11647)
+  * Performance improvement in pool optimization step (#11638)
+  * Performance improvement in `show -a <packagename>` (#11659)
+
+### [2.6.3] 2023-09-15
+
+  * Added audit.abandoned config setting. Can be set to `ignore`, `report` (current default) or `fail` (future default in 2.7) to make the audit command report abandoned packages as a security problem (#11639)
+  * Added a warning when duplicates `files` autoload rules are detected (#11109)
+  * Fixed unhandled promise rejection regression (#11620)
+  * Fixed loading of root aliases on path repo packages when doing partial updates (#11632)
+  * Fixed `archive` command not producing the correct output if the temp dir is a symlink (#11636)
+  * Fixed some replaced packages being incorrectly missing when unlocked in a partial update (#11629)
+
+### [2.6.2] 2023-09-03
+
+  * Reverted "Fixed binary proxies causing scripts inspecting `$_SERVER['SCRIPT_NAME']` to detect them, they are now more transparent (#11562)" which caused a regression (#11617)
+  * Fixed non-zero exit code on failed audits to only apply to `install --audit` runs and not implicit audits with `require`, `create-project` or `update` commands (#11616)
+  * Fixed `create-project` infinite post-install loop in some circumstances (#11613)
+
+### [2.6.1] 2023-09-01
+
+  * Reverted "Fixed executability of non-php binaries which are not marked executable (#11557)" which caused a regression (#11612)
+
+### [2.6.0] 2023-09-01
+
+  * Added audit.ignore config setting to ignore security advisories by id or CVE id (#11556, #11605)
+  * Added `rm` alias to the `remove` command (#11367)
+  * Added runtime platform check to verify the php-64bit requirement is met (#11334)
+  * Added platform package detection for lib-pq-libpq and lib-rdkafka-librdkafka (#11418)
+  * Added `--dry-run` to `dump-autoload` command to allow running --strict-psr checks without modifying the filesystem (#11608)
+  * Added support for `bump`ing patch level in `~1.2.3` constraints (#11590)
+  * Added prompt in `require` if the package name is not found but similar ones exist (#11284)
+  * Added support for env vars and `~` in repository paths for vcs and artifact repositories (#11453)
+  * Added support for local directory paths for repositories of type `composer` (#11526)
+  * Added links to package homepages in `why`/`why-not` command output (#11308)
+  * Added a `security` key to the `support` key of composer.json to set the URL to the vulnerability disclosure policy (#11271)
+  * Added support for gathering security advisories from multiple repositories for a single package (#11436)
+  * Fixed `install` exit code to be non-zero (5) if a requested security audit failed (#11362)
+  * ~~Fixed binary proxies causing scripts inspecting `$_SERVER['SCRIPT_NAME']` to detect them, they are now more transparent (#11562)~~ (Reverted in 2.6.2)
+  * ~~Fixed executability of non-php binaries which are not marked executable (#11557)~~ (Reverted in 2.6.1)
+  * Fixed `mtime` modification of the vendor dir to only happen when packages are modified, and not require lock file modification to happen (#11593)
+  * Fixed `create-project` using the wrong composer.json file if one was set via the `COMPOSER` env var (#11493)
+  * Fixed json editing to preserve indentation when updating json files (#11390)
+  * Fixed handling of broken junctions on windows (#11550)
+  * Fixed parsing of lib-curl-openssl version with OSX SecureTransport (#11534)
+  * Fixed svn repo parsing in some edge cases (#11350)
+  * Fixed handling of archive URLs without file extension (#11520)
+  * Performance improvement in pool optimization step (#11449, #11450)
+
 ### [2.5.8] 2023-06-09
 
   * Fixed regression in edge cases where root package gets added to a repository already during the install process (#11495)
   * Fixed EventDispatcher on windows picking bat files when using "@php binary" (#11490)
-  * Fixed ICU CDLR version parsing failing the whole process when ICU cannot initialize the resource bundle (#11492)
+  * Fixed ICU CLDR version parsing failing the whole process when ICU cannot initialize the resource bundle (#11492)
   * Fixed type declarations on ClassLoader (#11500)
 
 ### [2.5.7] 2023-05-24
@@ -254,7 +312,7 @@
   * Added abandoned flag to `show`/`outdated` commands JSON-formatted output (#10485)
   * Added config.reference option to `path` repositories to configure the way the reference is generated, and possibly reduce composer.lock conflicts (#10488)
   * Added automatic removal of allow-plugins rules when removing a plugin via the `remove` command (#10615)
-  * Added COMPOSER_IGNORE_PLATFOR_REQ & COMPOSER_IGNORE_PLATFOR_REQS env vars to configure the equivalent flags (#10616)
+  * Added `COMPOSER_IGNORE_PLATFORM_REQ` & `COMPOSER_IGNORE_PLATFORM_REQS` env vars to configure the equivalent flags (#10616)
   * Added support for Symfony 6.0 components
   * Added support for psr/log 3.x (#10454)
   * Fixed symlink creation in linux VM guest filesystems to be recognized by Windows (#10592)
@@ -1731,6 +1789,12 @@
 
   * Initial release
 
+[2.6.5]: https://github.com/composer/composer/compare/2.6.4...2.6.5
+[2.6.4]: https://github.com/composer/composer/compare/2.6.3...2.6.4
+[2.6.3]: https://github.com/composer/composer/compare/2.6.2...2.6.3
+[2.6.2]: https://github.com/composer/composer/compare/2.6.1...2.6.2
+[2.6.1]: https://github.com/composer/composer/compare/2.6.0...2.6.1
+[2.6.0]: https://github.com/composer/composer/compare/2.5.8...2.6.0
 [2.5.8]: https://github.com/composer/composer/compare/2.5.7...2.5.8
 [2.5.7]: https://github.com/composer/composer/compare/2.5.6...2.5.7
 [2.5.6]: https://github.com/composer/composer/compare/2.5.5...2.5.6

@@ -11,7 +11,7 @@
 # Exclude non-essential files from dist
 /.github/ export-ignore
 /doc export-ignore
-/phpstan/ export-ignore
+/phpstan/* export-ignore
 /tests/ export-ignore
 /.editorconfig export-ignore
 /.gitattributes export-ignore
@@ -19,7 +19,6 @@
 /.php-cs-fixer.php export-ignore
 /CHANGELOG.md export-ignore
 /CODE_OF_CONDUCT.md export-ignore
-/composer.lock export-ignore
 /phpunit.xml.dist export-ignore
 /PORTING_INFO export-ignore
 /README.md export-ignore
